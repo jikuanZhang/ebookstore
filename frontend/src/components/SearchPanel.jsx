@@ -11,7 +11,7 @@ function SearchPanel({ tag, title, description, keyword, onKeywordChange, onSear
         <TopBar tag={tag} title={title} description={description} />
         <Search
           allowClear
-          placeholder="请输入书名、作者或分类关键词"
+          placeholder="请输入书名关键词"
           enterButton="搜索"
           value={keyword}
           // onChange 负责输入过程中的实时同步。
