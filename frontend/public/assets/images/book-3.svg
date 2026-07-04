@@ -1,0 +1,10 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="24" fill="#FFF7ED"/>
+  <rect x="74" y="44" width="206" height="332" rx="20" fill="#C2410C"/>
+  <circle cx="176" cy="210" r="56" fill="#FED7AA"/>
+  <rect x="110" y="92" width="128" height="12" rx="6" fill="#FFEDD5"/>
+  <rect x="110" y="124" width="100" height="12" rx="6" fill="#FDBA74"/>
+  <text x="320" y="150" fill="#0F172A" font-size="34" font-family="Microsoft YaHei">人间失格</text>
+  <text x="320" y="206" fill="#C2410C" font-size="22" font-family="Microsoft YaHei">文学小说 / 经典阅读</text>
+  <text x="320" y="252" fill="#475569" font-size="18" font-family="Microsoft YaHei">以更丰富的内容提升页面真实感</text>
+</svg>

@@ -1,0 +1,258 @@
+:root {
+  color: #1f2937;
+  background: #f5f7fb;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f5f7fb;
+}
+
+a {
+  text-decoration: none;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.app-layout {
+  min-height: 100vh;
+}
+
+.app-sider {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%) !important;
+  padding: 24px 16px;
+}
+
+.app-brand {
+  padding: 8px 8px 20px;
+}
+
+.app-brand__tag {
+  display: block;
+  margin-bottom: 8px;
+  color: #99f6e4 !important;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.app-brand__title {
+  margin: 0 0 8px !important;
+  color: #ffffff !important;
+}
+
+.app-brand__text {
+  color: rgba(255, 255, 255, 0.75) !important;
+  line-height: 1.7;
+}
+
+.app-main-layout {
+  min-width: 0;
+}
+
+.app-menu {
+  background: transparent !important;
+  border-inline-end: none !important;
+  margin-bottom: 16px;
+}
+
+.app-menu .ant-menu-item {
+  color: rgba(255, 255, 255, 0.84) !important;
+  border-radius: 12px;
+}
+
+.app-menu .ant-menu-item-selected {
+  background: rgba(20, 184, 166, 0.22) !important;
+  color: #ffffff !important;
+}
+
+.user-card {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff;
+}
+
+.user-card .ant-typography,
+.user-card .ant-typography-secondary {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.user-card__button {
+  margin-top: 16px;
+}
+
+.app-header {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 24px !important;
+  height: auto !important;
+  min-height: 72px;
+  line-height: 1.4 !important;
+  display: flex;
+  align-items: center;
+}
+
+.app-header__meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.app-header__title {
+  display: block;
+  color: #111827 !important;
+  font-weight: 700;
+  line-height: 1.2 !important;
+}
+
+.app-content {
+  padding: 24px;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #dbeafe 0%, #f0fdf4 100%);
+}
+
+.login-card {
+  width: min(100%, 520px);
+  border-radius: 24px !important;
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.12) !important;
+}
+
+.login-card__eyebrow {
+  color: #0f766e;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.login-links {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.book-card__figure,
+.detail-card__figure {
+  margin: 0;
+}
+
+.book-card__image,
+.detail-card__cover,
+.mini-book__image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.book-card__image {
+  aspect-ratio: 640 / 420;
+  object-fit: cover;
+}
+
+.detail-card__cover {
+  aspect-ratio: 640 / 420;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.mini-book__image {
+  height: 160px;
+  object-fit: contain;
+  background: #f8fafc;
+}
+
+.mini-book {
+  height: 100%;
+}
+
+.mini-book__link {
+  display: block;
+  color: inherit;
+}
+
+.mini-book__media {
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.mini-book__title {
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+}
+
+.book-cover-wrap,
+.detail-cover-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  min-height: 320px;
+  background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
+}
+
+.book-cover {
+  width: 100%;
+  /* max-width: 220px; */
+  aspect-ratio: 1.5;
+  object-fit: contain;
+  object-position: center;
+}
+
+.detail-cover {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.book-description-preview {
+  min-height: 66px;
+  margin-bottom: 0 !important;
+}
+
+.book-card__footer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-text {
+  color: #c2410c !important;
+  font-size: 1.05rem;
+}
+
+.detail-price {
+  font-size: 1.6rem;
+}
+
+.table-book-cover {
+  width: 56px;
+  height: 74px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+@media (max-width: 992px) {
+  .app-content {
+    padding: 16px;
+  }
+}

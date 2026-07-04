@@ -1,0 +1,13 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="24" fill="#E6FFFB"/>
+  <rect x="72" y="46" width="204" height="328" rx="20" fill="#0F766E"/>
+  <rect x="104" y="86" width="140" height="12" rx="6" fill="#CCFBF1"/>
+  <rect x="104" y="118" width="108" height="12" rx="6" fill="#99F6E4"/>
+  <path d="M136 178H212V286H136V178Z" fill="#F8FAFC" fill-opacity="0.22"/>
+  <path d="M174 204C154.118 204 138 220.118 138 240C138 259.882 154.118 276 174 276C193.882 276 210 259.882 210 240C210 220.118 193.882 204 174 204Z" fill="#CCFBF1"/>
+  <text x="322" y="150" fill="#0F172A" font-size="32" font-family="Microsoft YaHei">JavaScript</text>
+  <text x="322" y="194" fill="#0F172A" font-size="30" font-family="Microsoft YaHei">高级程序设计</text>
+  <text x="322" y="256" fill="#0F766E" font-size="22" font-family="Microsoft YaHei">前端开发 / 编程经典</text>
+  <text x="322" y="304" fill="#475569" font-size="18" font-family="Microsoft YaHei">值得反复阅读的推荐图书</text>
+</svg>
+

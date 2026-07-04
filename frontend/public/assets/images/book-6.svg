@@ -1,0 +1,11 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="24" fill="#FEF2F2"/>
+  <rect x="76" y="42" width="206" height="336" rx="24" fill="#BE123C"/>
+  <rect x="112" y="92" width="136" height="12" rx="6" fill="#FFE4E6"/>
+  <rect x="112" y="124" width="94" height="12" rx="6" fill="#FDA4AF"/>
+  <path d="M134 184H224V274H134V184Z" fill="#FFFFFF" fill-opacity="0.2"/>
+  <path d="M146 260C162 226 196 226 212 260" stroke="#FFE4E6" stroke-width="12" stroke-linecap="round"/>
+  <text x="324" y="150" fill="#0F172A" font-size="34" font-family="Microsoft YaHei">活着</text>
+  <text x="324" y="206" fill="#BE123C" font-size="22" font-family="Microsoft YaHei">华语文学 / 经典作品</text>
+  <text x="324" y="252" fill="#475569" font-size="18" font-family="Microsoft YaHei">丰富书籍内容与视觉配色层次</text>
+</svg>
