@@ -1,5 +1,6 @@
 package com.example.bookstore.service.impl;
 
+import com.example.bookstore.dao.OrderDao;
 import com.example.bookstore.dto.BookSalesStatResponse;
 import com.example.bookstore.dto.CustomerPurchaseStatResponse;
 import com.example.bookstore.dto.OrderResponse;
@@ -9,10 +10,6 @@ import com.example.bookstore.entity.CartItem;
 import com.example.bookstore.entity.OrderItem;
 import com.example.bookstore.entity.PurchaseOrder;
 import com.example.bookstore.entity.User;
-import com.example.bookstore.repository.BookRepository;
-import com.example.bookstore.repository.CartItemRepository;
-import com.example.bookstore.repository.OrderRepository;
-import com.example.bookstore.repository.UserRepository;
 import com.example.bookstore.service.OrderService;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -29,27 +26,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    private final OrderRepository orderRepository;
-    private final CartItemRepository cartItemRepository;
-    private final UserRepository userRepository;
-    private final BookRepository bookRepository;
+    private final OrderDao orderDao;
 
-    public OrderServiceImpl(
-            OrderRepository orderRepository,
-            CartItemRepository cartItemRepository,
-            UserRepository userRepository,
-            BookRepository bookRepository) {
-        this.orderRepository = orderRepository;
-        this.cartItemRepository = cartItemRepository;
-        this.userRepository = userRepository;
-        this.bookRepository = bookRepository;
+    public OrderServiceImpl(OrderDao orderDao) {
+        this.orderDao = orderDao;
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<OrderResponse> findOrders(Long userId, LocalDate startDate, LocalDate endDate, String bookName) {
         ensureUser(userId);
-        return orderRepository.findByUserIdOrderByCreatedAtDesc(userId).stream()
+        return orderDao.findOrdersByUserIdDesc(userId).stream()
                 .filter(order -> matchesDate(order, startDate, endDate))
                 .filter(order -> matchesBookName(order, bookName))
                 .map(OrderResponse::from)
@@ -59,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional(readOnly = true)
     public List<OrderResponse> findAllOrders(LocalDate startDate, LocalDate endDate, String bookName) {
-        return orderRepository.findAllByOrderByCreatedAtDesc().stream()
+        return orderDao.findAllOrdersDesc().stream()
                 .filter(order -> matchesDate(order, startDate, endDate))
                 .filter(order -> matchesBookName(order, bookName))
                 .map(OrderResponse::from)
@@ -70,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public OrderResponse createOrderFromCart(Long userId) {
         User user = ensureUser(userId);
-        List<CartItem> cartItems = cartItemRepository.findByUserId(userId);
+        List<CartItem> cartItems = orderDao.findCartItemsByUserId(userId);
         if (cartItems.isEmpty()) {
             throw new IllegalArgumentException("Cart is empty.");
         }
@@ -89,12 +76,12 @@ public class OrderServiceImpl implements OrderService {
                 throw new IllegalArgumentException("Not enough stock for " + book.getTitle() + ".");
             }
             book.setStock(nextStock);
-            bookRepository.save(book);
+            orderDao.saveBook(book);
             order.addItem(new OrderItem(book, cartItem.getQuantity()));
         }
 
-        PurchaseOrder savedOrder = orderRepository.save(order);
-        cartItemRepository.deleteByUserId(userId);
+        PurchaseOrder savedOrder = orderDao.saveOrder(order);
+        orderDao.deleteCartItemsByUserId(userId);
         return OrderResponse.from(savedOrder);
     }
 
@@ -152,7 +139,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional(readOnly = true)
     public CustomerPurchaseStatResponse findCustomerStats(Long userId, LocalDate startDate, LocalDate endDate) {
         ensureUser(userId);
-        List<PurchaseOrder> orders = orderRepository.findByUserIdOrderByCreatedAtDesc(userId).stream()
+        List<PurchaseOrder> orders = orderDao.findOrdersByUserIdDesc(userId).stream()
                 .filter(order -> matchesDate(order, startDate, endDate))
                 .toList();
         Map<Long, BookSalesStatResponse> bookStats = new LinkedHashMap<>();
@@ -184,7 +171,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private User ensureUser(Long userId) {
-        return userRepository.findById(userId)
+        return orderDao.findUserById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + userId));
     }
 
@@ -195,7 +182,7 @@ public class OrderServiceImpl implements OrderService {
 
     private List<PurchaseOrder> filteredOrders(LocalDate startDate, LocalDate endDate) {
         List<PurchaseOrder> result = new ArrayList<>();
-        for (PurchaseOrder order : orderRepository.findAllByOrderByCreatedAtDesc()) {
+        for (PurchaseOrder order : orderDao.findAllOrdersDesc()) {
             if (matchesDate(order, startDate, endDate)) {
                 result.add(order);
             }

@@ -5,15 +5,12 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.example.bookstore.dao.OrderDao;
 import com.example.bookstore.dto.OrderResponse;
 import com.example.bookstore.entity.Book;
 import com.example.bookstore.entity.CartItem;
 import com.example.bookstore.entity.PurchaseOrder;
 import com.example.bookstore.entity.User;
-import com.example.bookstore.repository.BookRepository;
-import com.example.bookstore.repository.CartItemRepository;
-import com.example.bookstore.repository.OrderRepository;
-import com.example.bookstore.repository.UserRepository;
 import com.example.bookstore.service.impl.OrderServiceImpl;
 import java.math.BigDecimal;
 import java.util.List;
@@ -28,16 +25,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class OrderServiceImplTest {
 
     @Mock
-    private OrderRepository orderRepository;
-
-    @Mock
-    private CartItemRepository cartItemRepository;
-
-    @Mock
-    private UserRepository userRepository;
-
-    @Mock
-    private BookRepository bookRepository;
+    private OrderDao orderDao;
 
     @InjectMocks
     private OrderServiceImpl orderService;
@@ -49,10 +37,10 @@ class OrderServiceImplTest {
         Book book = book();
         CartItem cartItem = new CartItem(user, book, 2);
 
-        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
-        when(cartItemRepository.findByUserId(1L)).thenReturn(List.of(cartItem));
-        when(bookRepository.save(book)).thenReturn(book);
-        when(orderRepository.save(any(PurchaseOrder.class))).thenAnswer(invocation -> {
+        when(orderDao.findUserById(1L)).thenReturn(Optional.of(user));
+        when(orderDao.findCartItemsByUserId(1L)).thenReturn(List.of(cartItem));
+        when(orderDao.saveBook(book)).thenReturn(book);
+        when(orderDao.saveOrder(any(PurchaseOrder.class))).thenAnswer(invocation -> {
             PurchaseOrder order = invocation.getArgument(0);
             order.setId(100L);
             return order;
@@ -64,9 +52,9 @@ class OrderServiceImplTest {
         assertThat(response.getTotalAmount()).isEqualByComparingTo("178.00");
         assertThat(response.getItems()).hasSize(1);
         assertThat(book.getStock()).isEqualTo(8);
-        verify(bookRepository).save(book);
-        verify(orderRepository).save(any(PurchaseOrder.class));
-        verify(cartItemRepository).deleteByUserId(1L);
+        verify(orderDao).saveBook(book);
+        verify(orderDao).saveOrder(any(PurchaseOrder.class));
+        verify(orderDao).deleteCartItemsByUserId(1L);
     }
 
     private Book book() {
